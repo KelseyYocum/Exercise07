@@ -15,11 +15,27 @@ def main():
     scores_dictionary = dict(scores_list)
 
     # alphabetizing dictionary keys
-    sorted_keys = sorted(scores_dictionary.keys())
-
-    # printing alphabetized keys and values
-    for key in sorted_keys:
+    sorted_restaurants = sorted(scores_dictionary.keys())
+    for key in sorted_restaurants:
         print "%s is rated at %s." % (key, scores_dictionary[key])
+
+    # creating a dictionary organized by rating
+    ratings_dictionary = {}
+    for restaurant, rating in scores_dictionary.iteritems():
+        if ratings_dictionary.has_key(rating):
+            ratings_dictionary[rating].append(restaurant)
+        else:
+            ratings_dictionary.setdefault(rating, [restaurant])
+
+    # printing 
+    sorted_ratings = sorted(ratings_dictionary.keys())
+    sorted_ratings.reverse()
+
+    for rating in sorted_ratings:
+        print "Restaurants that got a score of %s:" % (rating)
+        for restaurant_name in ratings_dictionary[rating]:
+            print restaurant_name
+       
 
 
 main()
